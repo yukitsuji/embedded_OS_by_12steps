@@ -1,5 +1,6 @@
 # embedded_OS_by_12steps
 Mac OS X Yosemite version 10.10.4
+
 Reference：
 1. http://d.hatena.ne.jp/sandai/20120917/p1
 2. http://blog.livedoor.jp/noanoa07/archives/1994052.html
