@@ -1,0 +1,7 @@
+tdir_h8300elf=h8300-elf
+tdir_h8300helf=h8300-elf
+tdir_h8300self=h8300-elf
+tdir_h8300hnelf=h8300-elf
+tdir_h8300snelf=h8300-elf
+tdir_h8300sxelf=h8300-elf
+tdir_h8300sxnelf=h8300-elf

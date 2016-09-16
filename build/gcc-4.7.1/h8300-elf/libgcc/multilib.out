@@ -1,0 +1,13 @@
+.;
+h8300h;@mh
+h8300s;@ms
+h8sx;@msx
+h8300h/normal;@mh@mn
+h8300h/int32;@mh@mint32
+h8300h/normal/int32;@mh@mn@mint32
+h8300s/normal;@ms@mn
+h8300s/int32;@ms@mint32
+h8300s/normal/int32;@ms@mn@mint32
+h8sx/normal;@msx@mn
+h8sx/int32;@msx@mint32
+h8sx/normal/int32;@msx@mn@mint32

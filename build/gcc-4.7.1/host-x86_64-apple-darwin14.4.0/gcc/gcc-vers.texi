@@ -1,0 +1,5 @@
+@set version-GCC 4.7.1
+@clear DEVELOPMENT
+@set srcdir /Users/tsujiyuuki/Dropbox/For_Programming/12step/build/gcc-4.7.1/host-x86_64-apple-darwin14.4.0/gcc/../.././gcc
+@set VERSION_PACKAGE (GCC) 
+@set BUGURL @uref{http://gcc.gnu.org/bugs.html}
