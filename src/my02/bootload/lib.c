@@ -7,7 +7,7 @@ void *memset(void *b, int c, long len){
   for (p=b; len > 0; len--){
     *(p++) = c;
   }
-  return b
+  return b;
 }
 
 void *memcpy(void *dst, const void *src, long len){

@@ -30,7 +30,7 @@ vectors[0]に格納されている_startから処理を開始する＝リセッ�
 	.global	_start
 #	.type	_start,@function
 _start:#アセンブラでは関数名を変数名などには_を付ける
-	mov.l	#0xffff00,spの設定
+	mov.l	#0xffff00,sp
 	jsr	@_main
 
 1:
