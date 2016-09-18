@@ -2,6 +2,8 @@
 #include <serial.h>
 #include <lib.h>
 #include <xmodem.h>
+#include <elf.h>
+
 //データ領域とBSS領域を初期化し、シリアルの初期化を行う
 static int init(void){
   //以下はリンカスクリプトで定義されているシンボル
@@ -87,6 +89,8 @@ int main(void){
       putxval(size, 0);
       puts("\n");
       dump(loadbuf, size);
+    }else if(!strcmp(buf, "run")){
+      elf_load(loadbuf); /*メモリ上に展開*/
     }else {
       puts("unknown.\n");
     }
