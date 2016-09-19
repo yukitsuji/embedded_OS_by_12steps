@@ -38,7 +38,7 @@ struct elf_program_header {
   long align;
 };
 
-/* ELF¥Ø¥Ã¥À¤Î¥Á¥§¥Ã¥¯ */
+/* ELFヘッダのチェック */
 static int elf_check(struct elf_header *header)
 {
   if (memcmp(header->id.magic, "\x7f" "ELF", 4))
@@ -56,43 +56,40 @@ static int elf_check(struct elf_header *header)
   return 0;
 }
 
-/* ¥»¥°¥á¥ó¥ÈÃ±°Ì¤Ç¤Î¥í¡¼¥É */
+/* プログラムヘッダのチェック */
 static int elf_load_program(struct elf_header *header)
 {
   int i;
   struct elf_program_header *phdr;
 
   for (i = 0; i < header->program_header_num; i++) {
-    /* ¥×¥í¥°¥é¥à¡¦¥Ø¥Ã¥À¤ò¼èÆÀ */
+    /* セグメント単位でのロード */
     phdr = (struct elf_program_header *)
       ((char *)header + header->program_header_offset +
        header->program_header_size * i);
 
-    if (phdr->type != 1) /* ¥í¡¼¥É²ÄÇ½¤Ê¥»¥°¥á¥ó¥È¤«¡© */
+    if (phdr->type != 1) /* ロード可能なセグメントか */
       continue;
 
-    /* ¤È¤ê¤¢¤¨¤º¼Â¸³ÍÑ¤Ë¡¤¼ÂºÝ¤Ë¥í¡¼¥É¤»¤º¤Ë¥»¥°¥á¥ó¥È¾ðÊó¤òÉ½¼¨¤¹¤ë */
-    putxval(phdr->offset,        6); puts(" ");
-    putxval(phdr->virtual_addr,  8); puts(" ");
-    putxval(phdr->physical_addr, 8); puts(" ");
-    putxval(phdr->file_size,     5); puts(" ");
-    putxval(phdr->memory_size,   5); puts(" ");
-    putxval(phdr->flags,         2); puts(" ");
-    putxval(phdr->align,         2); puts("\n");
+    /* 物理アドレスにfile_sizeの大きさのセグメントをコピー */
+    memcpy((char *)phdr->physical_addr, (char *)header + phdr->offset,
+        phdr->file_size);
+    /* BSS領域の準備のため、memset()でゼロクリア*/
+    memset((char *)phdr->physical_addr + phdr->file_size, 0,
+        phdr->memory_size - phdr->file_size);
   }
-
   return 0;
 }
 
-int elf_load(char *buf)
+char *elf_load(char *buf)
 {
   struct elf_header *header = (struct elf_header *)buf;
 
-  if (elf_check(header) < 0) /* ELF¥Ø¥Ã¥À¤Î¥Á¥§¥Ã¥¯ */
-    return -1;
+  if (elf_check(header) < 0) /* ELF¿¿¿¿¿¿¿¿ */
+    return NULL;
 
-  if (elf_load_program(header) < 0) /* ¥»¥°¥á¥ó¥ÈÃ±°Ì¤Ç¤Î¥í¡¼¥É */
-    return -1;
+  if (elf_load_program(header) < 0) /* ELF¿¿¿¿¿¿¿¿¿¿¿¿ */
+    return NULL;
 
-  return 0;
+  return (char *)header->entry_point;
 }
