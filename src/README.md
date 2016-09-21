@@ -15,3 +15,4 @@
 
 ####xmodem.c：XMODEMによるファイル転送  
 
+####elf.c：buffer領域のデータをRAMへと展開する    
