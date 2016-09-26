@@ -1,4 +1,4 @@
-# embedded_OS_by_12steps（12ステップで作る組み込みOS自作入門：For Mac）
+# 12ステップで作る組み込みOS自作入門：For Mac
 Mac OS X Yosemite version 10.10.4  
 
 Reference：  
