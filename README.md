@@ -1,6 +1,8 @@
 # 12ステップで作る組み込みOS自作入門：For Mac
 Mac OS X Yosemite version 10.10.4  
 
+「12ステップで作る組込みOS自作入門」のコード  
+
 1~5章：boot loaderの作成  
 6~12章：osの作成  
 
